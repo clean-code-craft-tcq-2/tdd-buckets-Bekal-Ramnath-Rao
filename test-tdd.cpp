@@ -3,7 +3,7 @@
 #include "test/catch.hpp"
 #include "RangeandReadings.h"
 
-TEST_CASE("") {
+TEST_CASE("Check range and readings from charging session") {
 
   int chargingSession[] = {4,5}
   REQUIRE(getRangeandReadingsinChargingSession(chargingSession) == "4-5, 2");
