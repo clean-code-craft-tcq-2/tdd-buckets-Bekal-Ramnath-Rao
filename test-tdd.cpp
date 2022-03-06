@@ -5,7 +5,7 @@
 
 TEST_CASE("Check range and readings from charging session") {
 
-  int chargingSession[] = {4,5}
+  int chargingSession[] = {4,5};
   REQUIRE(getRangeandReadingsinChargingSession(chargingSession) == "4-5, 2");
 
 }
