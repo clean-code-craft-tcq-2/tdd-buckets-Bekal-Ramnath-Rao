@@ -96,7 +96,7 @@ int sliceRangeandgetNoOfRangefromChargingSession(const int* chargingSession, int
 	return no_of_range;
 }
 
-string getRangeandReadingsinChargingSession(int chargingSession[],int no_of_ChargingSession)
+string getRangeandReadingsinChargingSession(int* chargingSession,int no_of_ChargingSession)
 {
 	int range[100][2]={};
 	int row_index;
