@@ -6,6 +6,7 @@
 TEST_CASE("Check range and readings from charging session") {
 
   int chargingSession[] = {4,5};
-  REQUIRE(getRangeandReadingsinChargingSession(chargingSession) == "4-5, 2");
+  int size_of_charginSession = sizeof(chargingSession)/sizeof(chargingSession[0])
+  REQUIRE(getRangeandReadingsinChargingSession(chargingSession,size_of_charginSession) == "4-5, 2");
 
 }
