@@ -5,9 +5,9 @@
 
 TEST_CASE("Check range and readings from charging session") {
 
-  int chargingSession[] = {4,5};
+  int chargingSession1[] = {4,5};
   int size_of_charginSession = sizeof(chargingSession)/sizeof(chargingSession[0]);
-  REQUIRE(getRangeandReadingsinChargingSession(chargingSession,size_of_charginSession) == "4-5, 2");
-  chargingSession[12] = {1,1,1,2,2,3,3,3,3,4,4,4};
-  REQUIRE(getRangeandReadingsinChargingSession(chargingSession,size_of_charginSession) == "1-2, 5\n3-4, 8");
+  REQUIRE(getRangeandReadingsinChargingSession(chargingSession1,size_of_charginSession) == "4-5, 2");
+  int chargingSession2[] = {1,1,1,2,2,3,3,3,3,4,4,4};
+  REQUIRE(getRangeandReadingsinChargingSession(chargingSession2,size_of_charginSession) == "1-2, 5\n3-4, 8");
 }
