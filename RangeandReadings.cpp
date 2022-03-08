@@ -84,8 +84,8 @@ void arrangeChargingSesssioninAscendingOrder(int* l_chargingSession,int no_of_Ch
 
 int sliceRangeandgetNoOfRangefromChargingSession(const int* chargingSession, int no_of_ChargingSession,int (*l_range)[2], int IntervalForRange)
 {
-	int lower_limit = findthelowerlimitinChargingSession(chargingSession,no_of_ChargingSession);
-	int upper_limit = findtheupperlimitinChargingSession(chargingSession,no_of_ChargingSession);
+	int lower_limit = chargingSession[0];
+	int upper_limit = chargingSession[no_of_ChargingSession-1];
 	int no_of_range=0;
 	int index=0;
 
