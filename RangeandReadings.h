@@ -3,4 +3,4 @@
 
 using namespace std;
 
-string getRangeandReadingsinChargingSession(int*,int);
+string getRangeandReadingsinChargingSession(int*, int, int);

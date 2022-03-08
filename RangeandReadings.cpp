@@ -5,8 +5,6 @@
 
 using namespace std;
 
-#define IntervalForRange 1 // This value can be parameterised if customer requests for customised value
-
 bool isChargingSessionWithintherange(int index,const int* chargingSession, const int* range)
 {
 	return (chargingSession[index]>=range[0]) && (chargingSession[index]<=range[1]);
@@ -84,7 +82,7 @@ void arrangeChargingSesssioninAscendingOrder(int* l_chargingSession,int no_of_Ch
 	}
 }
 
-int sliceRangeandgetNoOfRangefromChargingSession(const int* chargingSession, int no_of_ChargingSession,int (*l_range)[2])
+int sliceRangeandgetNoOfRangefromChargingSession(const int* chargingSession, int no_of_ChargingSession,int (*l_range)[2], int IntervalForRange)
 {
 	int lower_limit = findthelowerlimitinChargingSession(chargingSession,no_of_ChargingSession);
 	int upper_limit = findtheupperlimitinChargingSession(chargingSession,no_of_ChargingSession);
@@ -102,13 +100,13 @@ int sliceRangeandgetNoOfRangefromChargingSession(const int* chargingSession, int
 	return no_of_range;
 }
 
-string getRangeandReadingsinChargingSession(int* chargingSession,int no_of_ChargingSession)
+string getRangeandReadingsinChargingSession(int* chargingSession,int no_of_ChargingSession, int IntervalForRange)
 {
 	int range[100][2]={};
 	int row_index;
 	string RANGES_READINGS = {};
 	arrangeChargingSesssioninAscendingOrder(chargingSession,no_of_ChargingSession);
-	int no_of_rows=sliceRangeandgetNoOfRangefromChargingSession(chargingSession,no_of_ChargingSession,range);
+	int no_of_rows=sliceRangeandgetNoOfRangefromChargingSession(chargingSession,no_of_ChargingSession,range,IntervalForRange);
 
 	for(row_index=0;row_index<no_of_rows;row_index++)
 	{
