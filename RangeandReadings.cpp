@@ -114,12 +114,10 @@ string getRangeandReadingsinChargingSession(int* chargingSession,int no_of_Charg
 	{
 		int  reading = determineNoOfReadingsfromRange(range[row_index],chargingSession, no_of_ChargingSession);
 		STRING = STRING + to_string(range[row_index][0])+"-"+to_string(range[row_index][1])+","+" "+to_string(reading); //printing in csv format
-		
 		if(row_index!=no_of_rows-1)//no need to add line once you have reached last slice of range
 		{
 			STRING = STRING+"\n";
 		}
 	}
-
 	return STRING;
 }
