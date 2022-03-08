@@ -56,16 +56,16 @@ int findthelowerlimitinChargingSession(const int* chargingSession, int no_of_Cha
 	return lower_limit;
 }
 
-void loopOverInnerindex(int Inner_index, int no_of_ChargingSession, int* l_chargingSession)
+void loopOverInnerindex(int Inner_index, int Outer_Index,int no_of_ChargingSession, int* l_chargingSession)
 {
 	int temporary_element;
 	while(Inner_index<no_of_ChargingSession)
 	{
-		if(l_chargingSession[Inner_index]>l_chargingSession[Inner_index-1])
+		if(l_chargingSession[Inner_index]<l_chargingSession[Outer_Index])
 		{
 			temporary_element=l_chargingSession[Inner_index];
-			l_chargingSession[Inner_index]=l_chargingSession[Inner_index -1];
-			l_chargingSession[Inner_index -1]=temporary_element;
+			l_chargingSession[Inner_index]=l_chargingSession[Outer_Index];
+			l_chargingSession[Outer_Index]=temporary_element;
 		}
 		Inner_index++;
 	}
@@ -78,7 +78,7 @@ void arrangeChargingSesssioninAscendingOrder(int* l_chargingSession,int no_of_Ch
 	//Algorithm to arrange charging session in Ascending Order
 	for(Outer_index=0;Outer_index<no_of_ChargingSession;Outer_index++)
 	{		
-		loopOverInnerindex(Outer_index+1,no_of_ChargingSession,l_chargingSession);
+		loopOverInnerindex(Outer_index+1,Outer_index,no_of_ChargingSession,l_chargingSession);
 	}
 }
 
@@ -87,13 +87,18 @@ int sliceRangeandgetNoOfRangefromChargingSession(const int* chargingSession, int
 	int lower_limit = findthelowerlimitinChargingSession(chargingSession,no_of_ChargingSession);
 	int upper_limit = findtheupperlimitinChargingSession(chargingSession,no_of_ChargingSession);
 	int no_of_range=0;
+	int index=0;
 
 	// Algorithm to slice the range
 	while(lower_limit<=upper_limit)
 	{
 		l_range[no_of_range][0]= lower_limit;
 		l_range[no_of_range][1]= lower_limit + IntervalForRange;
-		lower_limit = l_range[no_of_range][1] + 1;
+		while(!(chargingSession[index]>(lower_limit + IntervalForRange)))
+		{
+			index++;
+		}
+		lower_limit = chargingSession[index];
 		no_of_range++;
 	}
 
