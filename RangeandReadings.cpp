@@ -7,13 +7,18 @@ using namespace std;
 
 #define IntervalForRange 1 // This value can be parameterised if customer requests for customised value
 
+bool isChargingSessionWithintherange(int index,const int* chargingSession, const int* range)
+{
+	return (chargingSession[index]>=range[0]) && (chargingSession[index]<=range[1]);
+}
+
 int determineNoOfReadingsfromRange(const int* range,const int* chargingSession, int no_of_ChargingSession)
 {
 	int readings=0;
 
-	for(int i=0;i<no_of_ChargingSession;i++)
+	for(int index=0;index<no_of_ChargingSession;index++)
 	{
-		if((chargingSession[i]>=range[0]) && (chargingSession[i]<=range[1]))
+		if(isChargingSessionWithintherange(index,chargingSession,range))
 		{
 			readings++;
 		}
