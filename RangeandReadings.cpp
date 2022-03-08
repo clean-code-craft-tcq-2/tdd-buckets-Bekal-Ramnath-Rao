@@ -5,12 +5,13 @@
 
 using namespace std;
 
-int determineNoOfReadingsfromRange(const int* range,const int* chargingSession)
+#define IntervalForRange 1 // This value can be parameterised if customer requests for customised value
+
+int determineNoOfReadingsfromRange(const int* range,const int* chargingSession, int no_of_ChargingSession)
 {
 	int readings=0;
-	int size = sizeof(chargingSession)/sizeof(chargingSession[0]);
 
-	for(int i=0;i<size;i++)
+	for(int i=0;i<no_of_ChargingSession;i++)
 	{
 		if((chargingSession[i]>=range[0]) && (chargingSession[i]<=range[1]))
 		{
@@ -21,12 +22,11 @@ int determineNoOfReadingsfromRange(const int* range,const int* chargingSession)
 	return readings;
 }
 
-int findtheupperlimitinChargingSession(const int* chargingSession)
+int findtheupperlimitinChargingSession(const int* chargingSession, int no_of_ChargingSession)
 {
-	int size = sizeof(chargingSession)/sizeof(chargingSession[0]);
 	int upper_limit = chargingSession[0];
 
-	for(int i=0;i<size;i++)
+	for(int i=0;i<no_of_ChargingSession;i++)
 	{
 		if(upper_limit<chargingSession[i])
 		{
@@ -37,12 +37,11 @@ int findtheupperlimitinChargingSession(const int* chargingSession)
 	return upper_limit;
 }
 
-int findthelowerlimitinChargingSession(const int* chargingSession)
+int findthelowerlimitinChargingSession(const int* chargingSession, int no_of_ChargingSession)
 {
-	int size = sizeof(chargingSession)/sizeof(chargingSession[0]);
 	int lower_limit = chargingSession[0];
 
-	for(int i=0;i<size;i++)
+	for(int i=0;i<no_of_ChargingSession;i++)
 	{
 		if(lower_limit>chargingSession[i])
 		{
@@ -53,20 +52,68 @@ int findthelowerlimitinChargingSession(const int* chargingSession)
 	return lower_limit;
 }
 
-void determineRangefromChargingSession(const int* chargingSession, int *l_range)
+void loopOverInnerindex(int Inner_index, int no_of_ChargingSession, int* l_chargingSession)
 {
-	int lower_limit = findthelowerlimitinChargingSession(chargingSession);
-	int upper_limit = findtheupperlimitinChargingSession(chargingSession);
-
-	l_range[0] = {lower_limit};
-	l_range[1] = {upper_limit};
+	int temporary_element;
+	while(Inner_index<no_of_ChargingSession)
+	{
+		if(l_chargingSession[Inner_index]>l_chargingSession[Inner_index-1])
+		{
+			temporary_element=l_chargingSession[Inner_index];
+			l_chargingSession[Inner_index]=l_chargingSession[Inner_index -1];
+			l_chargingSession[Inner_index -1]=temporary_element;
+		}
+		Inner_index++;
+	}
 }
 
-string getRangeandReadingsinChargingSession(const int* chargingSession)
+void arrangeChargingSesssioninAscendingOrder(int* l_chargingSession,int no_of_ChargingSession)
 {
-	int range[2];
-	determineRangefromChargingSession(chargingSession,range);
-	int  reading = determineNoOfReadingsfromRange(range,chargingSession);
+	int temporary_element ,Outer_index,Inner_index;
 
-	return to_string(range[0])+"-"+to_string(range[1])+","+" "+to_string(reading);
+	//Algorithm to arrange charging session in Ascending Order
+	for(Outer_index=0;Outer_index<no_of_ChargingSession;Outer_index++)
+	{		
+		loopOverInnerindex(Outer_index+1,no_of_ChargingSession,l_chargingSession);
+	}
+}
+
+int sliceRangeandgetNoOfRangefromChargingSession(const int* chargingSession, int no_of_ChargingSession,int (*l_range)[2])
+{
+	int lower_limit = findthelowerlimitinChargingSession(chargingSession,no_of_ChargingSession);
+	int upper_limit = findtheupperlimitinChargingSession(chargingSession,no_of_ChargingSession);
+	int no_of_range=0;
+
+	// Algorithm to slice the range
+	while(lower_limit<=upper_limit)
+	{
+		l_range[no_of_range][0]= lower_limit;
+		l_range[no_of_range][1]= lower_limit + IntervalForRange;
+		lower_limit = l_range[no_of_range][1] + 1;
+		no_of_range++;
+	}
+
+	return no_of_range;
+}
+
+string getRangeandReadingsinChargingSession(int chargingSession[],int no_of_ChargingSession)
+{
+	int range[100][2]={};
+	int row_index;
+	string STRING = "";
+	arrangeChargingSesssioninAscendingOrder(chargingSession,no_of_ChargingSession);
+	int no_of_rows=sliceRangeandgetNoOfRangefromChargingSession(chargingSession,no_of_ChargingSession,range);
+
+	for(row_index=0;row_index<no_of_rows;row_index++)
+	{
+		int  reading = determineNoOfReadingsfromRange(range[row_index],chargingSession, no_of_ChargingSession);
+		STRING = STRING + to_string(range[row_index][0])+"-"+to_string(range[row_index][1])+","+" "+to_string(reading); //printing in csv format
+		
+		if(row_index!=no_of_rows-1)//no need to add line once you have reached last slice of range
+		{
+			STRING = STRING+"\n";
+		}
+	}
+
+	return STRING;
 }
