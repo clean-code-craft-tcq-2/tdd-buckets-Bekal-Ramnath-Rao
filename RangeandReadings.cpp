@@ -106,18 +106,20 @@ string getRangeandReadingsinChargingSession(int* chargingSession,int no_of_Charg
 {
 	int range[100][2]={};
 	int row_index;
-	string STRING = "";
+	string RANGES_READINGS = {};
 	arrangeChargingSesssioninAscendingOrder(chargingSession,no_of_ChargingSession);
 	int no_of_rows=sliceRangeandgetNoOfRangefromChargingSession(chargingSession,no_of_ChargingSession,range);
 
 	for(row_index=0;row_index<no_of_rows;row_index++)
 	{
 		int  reading = determineNoOfReadingsfromRange(range[row_index],chargingSession, no_of_ChargingSession);
-		STRING = STRING + to_string(range[row_index][0])+"-"+to_string(range[row_index][1])+","+" "+to_string(reading); //printing in csv format
+		RANGES_READINGS = RANGES_READINGS + to_string(range[row_index][0])+"-"+to_string(range[row_index][1])+","+" "+to_string(reading); //printing in csv format
+		
 		if(row_index!=no_of_rows-1)//no need to add line once you have reached last slice of range
 		{
-			STRING = STRING+"\n";
+			RANGES_READINGS = RANGES_READINGS+"\n";
 		}
 	}
-	return STRING;
+
+	return RANGES_READINGS;
 }
