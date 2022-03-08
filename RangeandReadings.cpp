@@ -40,15 +40,16 @@ int findtheupperlimitinChargingSession(const int* chargingSession, int no_of_Cha
 int findthelowerlimitinChargingSession(const int* chargingSession, int no_of_ChargingSession)
 {
 	int lower_limit = chargingSession[0];
+	int index=0;
 
-	for(int i=0;i<no_of_ChargingSession;i++)
+	while(index<no_of_ChargingSession)
 	{
-		if(lower_limit>chargingSession[i])
+		if(lower_limit>chargingSession[index])
 		{
-			lower_limit = chargingSession[i];
+			lower_limit = chargingSession[index];
 		}
+		index++;
 	}
-
 	return lower_limit;
 }
 
@@ -69,7 +70,7 @@ void loopOverInnerindex(int Inner_index, int no_of_ChargingSession, int* l_charg
 
 void arrangeChargingSesssioninAscendingOrder(int* l_chargingSession,int no_of_ChargingSession)
 {
-	int temporary_element ,Outer_index,Inner_index;
+	int temporary_element ,Outer_index;
 
 	//Algorithm to arrange charging session in Ascending Order
 	for(Outer_index=0;Outer_index<no_of_ChargingSession;Outer_index++)
