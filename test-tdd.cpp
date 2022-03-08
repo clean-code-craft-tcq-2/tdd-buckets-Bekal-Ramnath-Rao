@@ -14,4 +14,7 @@ TEST_CASE("Check range and readings from charging session") {
   int chargingSession3[] = {1,1,1,2,2,3,3,3,3,4,4,4};
   int size_of_charginSession3 = sizeof(chargingSession3)/sizeof(chargingSession3[0]);
   REQUIRE(getRangeandReadingsinChargingSession(chargingSession3,size_of_charginSession3,2) == "1-3, 9\n4-6, 3");
+  int chargingSession3[] = {3, 3, 5, 4, 10, 11, 12};
+  int size_of_charginSession3 = sizeof(chargingSession3)/sizeof(chargingSession3[0]);
+  REQUIRE(getRangeandReadingsinChargingSession(chargingSession3,size_of_charginSession3,2) == "3-5, 4\n10-12, 3");
 }
