@@ -25,37 +25,6 @@ int determineNoOfReadingsfromRange(const int* range,const int* chargingSession, 
 	return readings;
 }
 
-int findtheupperlimitinChargingSession(const int* chargingSession, int no_of_ChargingSession)
-{
-	int upper_limit = chargingSession[0];
-
-	for(int i=0;i<no_of_ChargingSession;i++)
-	{
-		if(upper_limit<chargingSession[i])
-		{
-			upper_limit = chargingSession[i];
-		}
-	}
-
-	return upper_limit;
-}
-
-int findthelowerlimitinChargingSession(const int* chargingSession, int no_of_ChargingSession)
-{
-	int lower_limit = chargingSession[0];
-	int index=0;
-
-	while(index<no_of_ChargingSession)
-	{
-		if(lower_limit>chargingSession[index])
-		{
-			lower_limit = chargingSession[index];
-		}
-		index++;
-	}
-	return lower_limit;
-}
-
 void loopOverInnerindex(int Inner_index, int Outer_Index,int no_of_ChargingSession, int* l_chargingSession)
 {
 	int temporary_element;
