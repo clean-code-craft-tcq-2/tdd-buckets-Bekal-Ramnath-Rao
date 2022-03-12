@@ -50,3 +50,13 @@ Start Test-driven approach
 1. Write the smallest possible failing test: give input `4,5`. assert output to be `4-5, 2`.
 1. Write the minimum amount of code that'll make it pass.
 1. Refactor any assumptions, continue to pass this test. Do not add any code without a corresponding test.
+
+## Approach
+
+1. Input --> Sequence of Charging sessions
+2. validating the sequence
+    - Checking for negative numbers
+    - Arranging the numbers in increasing order
+3. Slicing the numbers into ranges 
+4. Counting the reading in each range
+5. Printing the ranges and readings
