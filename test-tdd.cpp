@@ -22,5 +22,5 @@ TEST_CASE("Check range and readings from charging session") {
 TEST_CASE("Check conversion Analog to digital"){
   int Digital_value1[12] = {0,1,1,0,1,1,0,0,0,1,1,0} ;
   int size_of_Array = sizeof(Digital_value1)/sizeof(Digital_value1[0]);
-  REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array) == 4);
+  REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 10) == 4);
 }
