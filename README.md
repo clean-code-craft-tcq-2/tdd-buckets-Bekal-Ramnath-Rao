@@ -60,3 +60,12 @@ Start Test-driven approach
 3. Slicing the numbers into ranges 
 4. Counting the reading in each range
 5. Printing the ranges and readings
+
+## Activity Diagram
+
+@startuml
+
+(*) --> "First Action"
+"First Action" --> (*)
+
+@enduml
