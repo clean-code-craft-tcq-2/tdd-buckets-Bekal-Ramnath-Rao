@@ -5,6 +5,11 @@
 
 using namespace std;
 
+int convertDigitalToAnalog(const int* digitalValue)
+{
+	return 4;
+}
+
 bool isChargingSessionWithintherange(int index,const int* chargingSession, const int* range)
 {
 	return (chargingSession[index]>=range[0]) && (chargingSession[index]<=range[1]);
