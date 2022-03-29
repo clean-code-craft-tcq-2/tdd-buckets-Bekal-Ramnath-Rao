@@ -43,7 +43,7 @@ int convertDigitalToAnalog(const int* binaryValue,int sizeofArray, int maximum_l
 	int roundedoff_value;
 	int Decimal_value = funp_convertBinarytoDecimal(binaryValue,sizeofArray);
 
-	if(Decimal_value < 4096)
+	if(Decimal_value < 4095)
 	{
 		Analog_value = convertDecimaltoAnalogue(Decimal_value,maximum_limit);
 		roundoffAnalogValue(Analog_value,&roundedoff_value);
