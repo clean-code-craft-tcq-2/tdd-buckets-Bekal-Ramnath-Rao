@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int convertDigitalToAnalog(const int* digitalValue)
+int convertDigitalToAnalog(const int* digitalValue, int sizeofArray)
 {
 	return 4;
 }
