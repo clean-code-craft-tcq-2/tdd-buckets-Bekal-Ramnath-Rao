@@ -21,6 +21,5 @@ TEST_CASE("Check range and readings from charging session") {
 
 TEST_CASE("Check conversion Analog to digital"){
   int Digital_value[12] = {0,1,1,0,1,1,0,0,0,1,1,0} ;
-  int Expeced_value = 4;
   REQUIRE(convertDigitalToAnalog(Digital_value) == 4);
 }
