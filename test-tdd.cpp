@@ -18,3 +18,9 @@ TEST_CASE("Check range and readings from charging session") {
   int size_of_charginSession4 = sizeof(chargingSession4)/sizeof(chargingSession4[0]);
   REQUIRE(getRangeandReadingsinChargingSession(chargingSession4,size_of_charginSession4,2) == "3-5, 4\n10-12, 3");
 }
+
+TEST_CASE("Check conversion Analog to digital"){
+  int Digital_value[12] = {0,1,1,0,1,1,0,0,0,1,1,0} ;
+  int Expeced_value = 4;
+  REQUIRE(convertDigitalToAnalog(Digital_value) == 4);
+}
