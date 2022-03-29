@@ -4,3 +4,4 @@
 using namespace std;
 
 string getRangeandReadingsinChargingSession(int*, int, int);
+int convertDigitalToAnalog(const int*);
