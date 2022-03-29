@@ -5,9 +5,27 @@
 
 using namespace std;
 
-int convertDigitalToAnalog(const int* digitalValue, int sizeofArray)
+int convertDigitalToAnalog(const int* digitalValue,int sizeofArray, int maximum_limit)
 {
-	return 4;
+	int bit_position = 1;
+	int Digital_value = 0;
+	float Analog_value = 0;
+	int integer_converter;
+
+	for(int i=sizeofArray-1;i>0;i--)
+	{
+		if(digitalValue[i] != 0)
+		{
+			Digital_value = Digital_value + bit_position ; 
+		} 
+		bit_position = bit_position*2;
+	}
+
+	cout<<Digital_value<<endl;
+	Analog_value = maximum_limit * (Digital_value/ (pow(2,12)-1));
+	integer_converter = Analog_value + 0.5;
+	
+	return integer_converter;
 }
 
 bool isChargingSessionWithintherange(int index,const int* chargingSession, const int* range)
