@@ -24,7 +24,7 @@ int convertBinarytoDecimal(const int* binaryValue,int sizeofArray)
 
 float convertDecimaltoAnalogue(int Decimal_value, int maximum_limit)
 {
-	return maximum_limit * (Decimal_value/ (pow(2,12)-1));
+	return maximum_limit * (Decimal_value/ (pow(2,12)-2));
 }
 
 void roundoffAnalogValue(float Analog_value,int* addr_roundedoffValue)
