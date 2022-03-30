@@ -19,6 +19,12 @@ TEST_CASE("Check range and readings from charging session") {
   REQUIRE(getRangeandReadingsinChargingSession(chargingSession4,size_of_charginSession4,2) == "3-5, 4\n10-12, 3");
 }
 
+//lets try beavioural testing
+int convertBinarytoDecimal_ErrorSensor1(const int* binaryValue,int sizeofArray)
+{
+  return 4095;
+}
+
 TEST_CASE("Check conversion digital to Analog"){
   int Digital_value1[12] = {0,1,1,0,1,1,0,0,0,1,1,0} ;
   int size_of_Array = sizeof(Digital_value1)/sizeof(Digital_value1[0]);
@@ -26,10 +32,12 @@ TEST_CASE("Check conversion digital to Analog"){
   int (*funp_convertBinarytoDecimal)(const int*,int) = convertBinarytoDecimal;
   float (*funp_convertDecimaltoAnalog)(int,int,int) = convertDecimaltoAnalog;
   REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 10,12,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalog) == 4);
+  
+  funp_convertBinarytoDecimal = convertBinarytoDecimal_ErrorSensor1;
+  REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 10,12,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalog) == -1);
 }
 
-//lets try beavioural testing
-int convertBinarytoDecimal_Error(const int* binaryValue,int sizeofArray)
+int convertBinarytoDecimal_ErrorSensor2(const int* binaryValue,int sizeofArray)
 {
   return 1023;
 }
@@ -42,6 +50,6 @@ TEST_CASE("Check conversion Analog to digital for sensor that calculates chargin
   float (*funp_convertDecimaltoAnalog)(int,int,int) = convertDecimaltoAnalog_chargingDischarging;
   REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 15,10,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalog) ==14);
  
-  funp_convertBinarytoDecimal = convertBinarytoDecimal_Error;
+  funp_convertBinarytoDecimal = convertBinarytoDecimal_ErrorSensor2;
   REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 15,10,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalog) == -1);
 }
