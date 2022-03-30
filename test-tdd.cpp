@@ -43,5 +43,5 @@ TEST_CASE("Check conversion Analog to digital for sensor that calculates chargin
   REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 15,10,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalog) ==14);
  
   funp_convertBinarytoDecimal = convertBinarytoDecimal_Error;
-  REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 15,10,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalog) == 15);
+  REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 15,10,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalog) == -1);
 }
