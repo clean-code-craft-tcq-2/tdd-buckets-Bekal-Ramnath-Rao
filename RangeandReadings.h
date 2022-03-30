@@ -7,4 +7,4 @@ string getRangeandReadingsinChargingSession(int*, int, int);
 int convertDigitalToAnalog(const int*,int,int,void (*)(),int (*)(const int*,int));
 void printonConsole();
 int convertBinarytoDecimal(const int* ,int);
-int convertDecimaltoAnalogue_chargingDischarding(const int*,int,int,void (*)(),int (*)(const int*,int));
+int convertDigitalToAnalog_chargingAnddischarging(const int*,int,int,void (*)(),int (*)(const int*,int));
