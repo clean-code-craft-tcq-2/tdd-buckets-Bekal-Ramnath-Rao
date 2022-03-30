@@ -28,6 +28,11 @@ TEST_CASE("Check conversion digital to Analog"){
   REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 10,12,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalog) == 4);
 }
 
+//lets try beaviural testing
+int convertBinarytoDecimal_Error(const int* binaryValue,int sizeofArray)
+{
+  return 1023;
+}
 
 TEST_CASE("Check conversion Analog to digital for sensor that calculates charging and discharging current"){
   int Digital_value1[10] = {1,1,1,1,1,0,0,0,0,1} ;
@@ -36,4 +41,7 @@ TEST_CASE("Check conversion Analog to digital for sensor that calculates chargin
   int (*funp_convertBinarytoDecimal)(const int*,int) = convertBinarytoDecimal;
   float (*funp_convertDecimaltoAnalog)(int,int,int) = convertDecimaltoAnalog_chargingDischarging;
   REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 15,10,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalog) ==14);
+ 
+  funp_convertBinarytoDecimal = convertBinarytoDecimal_Error;
+  REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 15,10,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalog) == 15);
 }
