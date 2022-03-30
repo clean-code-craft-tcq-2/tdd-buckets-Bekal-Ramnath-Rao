@@ -166,12 +166,3 @@ string getRangeandReadingsinChargingSession(int* chargingSession,int no_of_Charg
 
 	return RANGES_READINGS;
 }
-
-int main()
-{
-  int Digital_value1[10] = {1,1,1,1,1,0,0,0,0,1} ;
-  int size_of_Array = sizeof(Digital_value1)/sizeof(Digital_value1[0]);
-  void (*funp_printOnConsole)() = printonConsole;
-  int (*funp_convertBinarytoDecimal)(const int*,int) = convertBinarytoDecimal;
-  cout<<convertDigitalToAnalog_chargingAnddischarging(Digital_value1, size_of_Array, 15,funp_printOnConsole,funp_convertBinarytoDecimal)<<endl;
-}
