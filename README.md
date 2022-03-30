@@ -60,3 +60,8 @@ Start Test-driven approach
 3. Slicing the numbers into ranges 
 4. Counting the reading in each range
 5. Printing the ranges and readings
+
+## Note
+
+Since the concept is to maintain legacy code, i have done the changes in the same file.
+Please let me know if we can segregate the code in new file
