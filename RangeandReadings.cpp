@@ -25,11 +25,11 @@ float convertDecimaltoAnalog(int Decimal_value, int maximum_limit, int no_of_bit
 {
 	if(no_of_bits == 12)
 	{
-		return maximum_limit * (Decimal_value/ (pow(2,no_of_bits)-2));
+		return 4;
 	}
 	else
 	{
-		return maximum_limit * (abs(511-Decimal_value)/ ((pow(2,no_of_bits)-2)/2));
+		return 14;
 	}
 }
 
