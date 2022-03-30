@@ -28,7 +28,7 @@ TEST_CASE("Check conversion digital to Analog"){
   REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 10,12,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalog) == 4);
 }
 
-//lets try beaviural testing
+//lets try beavioural testing
 int convertBinarytoDecimal_Error(const int* binaryValue,int sizeofArray)
 {
   return 1023;
