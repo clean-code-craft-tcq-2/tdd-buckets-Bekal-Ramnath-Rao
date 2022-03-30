@@ -19,10 +19,19 @@ TEST_CASE("Check range and readings from charging session") {
   REQUIRE(getRangeandReadingsinChargingSession(chargingSession4,size_of_charginSession4,2) == "3-5, 4\n10-12, 3");
 }
 
-TEST_CASE("Check conversion Analog to digital"){
+TEST_CASE("Check conversion digital to Analog"){
   int Digital_value1[12] = {0,1,1,0,1,1,0,0,0,1,1,0} ;
   int size_of_Array = sizeof(Digital_value1)/sizeof(Digital_value1[0]);
   void (*funp_printOnConsole)() = printonConsole;
   int (*funp_convertBinarytoDecimal)(const int*,int) = convertBinarytoDecimal;
   REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 10,funp_printOnConsole,funp_convertBinarytoDecimal) == 4);
+}
+
+
+TEST_CASE("Check conversion Analog to digital for sensor that calculates charging and discharging current"){
+  int Digital_value1[10] = {0,1,1,0,1,1,0,0,0,1} ;
+  int size_of_Array = sizeof(Digital_value1)/sizeof(Digital_value1[0]);
+  void (*funp_printOnConsole)() = printonConsole;
+  int (*funp_convertBinarytoDecimal)(const int*,int) = convertBinarytoDecimal;
+  REQUIRE(convertDigitalToAnalog_chargingAnddischarging(Digital_value1, size_of_Array, 10,funp_printOnConsole,funp_convertBinarytoDecimal) == 4);
 }
