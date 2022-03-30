@@ -23,12 +23,14 @@ int convertBinarytoDecimal(const int* binaryValue,int sizeofArray)
 
 float convertDecimaltoAnalog(int Decimal_value, int maximum_limit, int no_of_bits)
 {
-	return maximum_limit * (Decimal_value/ (pow(2,no_of_bits)-2));
-}
-
-float convertDecimaltoAnalog_chargingDischarging(int Decimal_value, int maximum_limit, int no_of_bits)
-{
-	return maximum_limit * (abs(511-Decimal_value)/ ((pow(2,no_of_bits)-2)/2));
+	if(no_of_bits == 12)
+	{
+		return maximum_limit * (Decimal_value/ (pow(2,no_of_bits)-2));
+	}
+	else
+	{
+		return maximum_limit * (abs(511-Decimal_value)/ ((pow(2,no_of_bits)-2)/2));
+	}
 }
 
 void roundoffAnalogValue(float Analog_value,int* addr_roundedoffValue)
