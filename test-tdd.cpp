@@ -34,6 +34,6 @@ TEST_CASE("Check conversion Analog to digital for sensor that calculates chargin
   int size_of_Array = sizeof(Digital_value1)/sizeof(Digital_value1[0]);
   void (*funp_printOnConsole)() = printonConsole;
   int (*funp_convertBinarytoDecimal)(const int*,int) = convertBinarytoDecimal;
-  float (*funp_convertDecimaltoAnalog)(int,int,int) = convertDecimaltoAnalog;
+  float (*funp_convertDecimaltoAnalog)(int,int,int) = convertDecimaltoAnalog_chargingDischarging;
   REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 15,10,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalog) ==14);
 }
