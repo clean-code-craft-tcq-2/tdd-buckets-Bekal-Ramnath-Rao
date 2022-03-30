@@ -10,7 +10,7 @@ int convertBinarytoDecimal(const int* binaryValue,int sizeofArray)
 	int bit_value = 1;
 	int Decimal_value = 0;
 
-	for(int i=sizeofArray-1;i>0;i--)
+	for(int i=sizeofArray-1;i>=0;i--)
 	{
 		if(binaryValue[i] != 0)
 		{
@@ -18,13 +18,17 @@ int convertBinarytoDecimal(const int* binaryValue,int sizeofArray)
 		} 
 		bit_value = bit_value*2;
 	}
-
 	return Decimal_value;
 }
 
-float convertDecimaltoAnalogue(int Decimal_value, int maximum_limit)
+float convertDecimaltoAnalogue(int Decimal_value, int maximum_limit, int no_of_bits)
 {
-	return maximum_limit * (Decimal_value/ (pow(2,12)-2));
+	return maximum_limit * (Decimal_value/ (pow(2,no_of_bits)-2));
+}
+
+float convertDecimaltoAnalogue_chargingDischarding(int Decimal_value, int maximum_limit, int no_of_bits)
+{
+	return maximum_limit * (abs(511-Decimal_value)/ ((pow(2,no_of_bits)-2)/2));
 }
 
 void roundoffAnalogValue(float Analog_value,int* addr_roundedoffValue)
@@ -45,7 +49,7 @@ int convertDigitalToAnalog(const int* binaryValue,int sizeofArray, int maximum_l
 
 	if(Decimal_value < 4095)
 	{
-		Analog_value = convertDecimaltoAnalogue(Decimal_value,maximum_limit);
+		Analog_value = convertDecimaltoAnalogue(Decimal_value,maximum_limit,12);
 		roundoffAnalogValue(Analog_value,&roundedoff_value);
 	}
 	else
@@ -55,6 +59,23 @@ int convertDigitalToAnalog(const int* binaryValue,int sizeofArray, int maximum_l
 	return roundedoff_value;
 }
 
+int convertDigitalToAnalog_chargingAnddischarging(const int* binaryValue,int sizeofArray, int maximum_limit,
+						   void (*funp_printonConsole)(),int (*funp_convertBinarytoDecimal)(const int*,int))
+{
+	float Analog_value = 0;
+	int roundedoff_value;
+	int Decimal_value = funp_convertBinarytoDecimal(binaryValue,sizeofArray);
+	if(Decimal_value < 1023)
+	{
+		Analog_value = convertDecimaltoAnalogue_chargingDischarding(Decimal_value,maximum_limit,10);
+		roundoffAnalogValue(Analog_value,&roundedoff_value);
+	}
+	else
+	{
+		funp_printonConsole;
+	}
+	return roundedoff_value;
+}
 bool isChargingSessionWithintherange(int index,const int* chargingSession, const int* range)
 {
 	return (chargingSession[index]>=range[0]) && (chargingSession[index]<=range[1]);
@@ -144,4 +165,13 @@ string getRangeandReadingsinChargingSession(int* chargingSession,int no_of_Charg
 	}
 
 	return RANGES_READINGS;
+}
+
+int main()
+{
+  int Digital_value1[10] = {1,1,1,1,1,0,0,0,0,1} ;
+  int size_of_Array = sizeof(Digital_value1)/sizeof(Digital_value1[0]);
+  void (*funp_printOnConsole)() = printonConsole;
+  int (*funp_convertBinarytoDecimal)(const int*,int) = convertBinarytoDecimal;
+  cout<<convertDigitalToAnalog_chargingAnddischarging(Digital_value1, size_of_Array, 15,funp_printOnConsole,funp_convertBinarytoDecimal)<<endl;
 }
