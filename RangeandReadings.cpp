@@ -21,12 +21,12 @@ int convertBinarytoDecimal(const int* binaryValue,int sizeofArray)
 	return Decimal_value;
 }
 
-float convertDecimaltoAnalogue(int Decimal_value, int maximum_limit, int no_of_bits)
+float convertDecimaltoAnalog(int Decimal_value, int maximum_limit, int no_of_bits)
 {
 	return maximum_limit * (Decimal_value/ (pow(2,no_of_bits)-2));
 }
 
-float convertDecimaltoAnalogue_chargingDischarding(int Decimal_value, int maximum_limit, int no_of_bits)
+float convertDecimaltoAnalog_chargingDischarging(int Decimal_value, int maximum_limit, int no_of_bits)
 {
 	return maximum_limit * (abs(511-Decimal_value)/ ((pow(2,no_of_bits)-2)/2));
 }
@@ -42,7 +42,7 @@ void printonConsole()
 }
 int convertDigitalToAnalog(const int* binaryValue,int sizeofArray, int maximum_limit,int no_of_bits,
 						   void (*funp_printonConsole)(),int (*funp_convertBinarytoDecimal)(const int*,int),
-						   float (*funp_convertDecimaltoAnalogue)(int,int,int))
+						   float (*funp_convertDecimaltoAnalog)(int,int,int))
 {
 	float Analog_value = 0;
 	int roundedoff_value;
@@ -50,7 +50,7 @@ int convertDigitalToAnalog(const int* binaryValue,int sizeofArray, int maximum_l
 
 	if(Decimal_value < (pow(2,no_of_bits)-1))
 	{
-		Analog_value = funp_convertDecimaltoAnalogue(Decimal_value,maximum_limit,no_of_bits);
+		Analog_value = funp_convertDecimaltoAnalog(Decimal_value,maximum_limit,no_of_bits);
 		roundoffAnalogValue(Analog_value,&roundedoff_value);
 	}
 	else
