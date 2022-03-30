@@ -40,16 +40,17 @@ void printonConsole()
 {
 	cout<<"value is grater than the capacity of ADC, go for higher bit ADC"<<endl;
 }
-int convertDigitalToAnalog(const int* binaryValue,int sizeofArray, int maximum_limit,
-						   void (*funp_printonConsole)(),int (*funp_convertBinarytoDecimal)(const int*,int))
+int convertDigitalToAnalog(const int* binaryValue,int sizeofArray, int maximum_limit,int no_of_bits,
+						   void (*funp_printonConsole)(),int (*funp_convertBinarytoDecimal)(const int*,int),
+						   float (*funp_convertDecimaltoAnalogue)(int,int,int))
 {
 	float Analog_value = 0;
 	int roundedoff_value;
 	int Decimal_value = funp_convertBinarytoDecimal(binaryValue,sizeofArray);
 
-	if(Decimal_value < 4095)
+	if(Decimal_value < (pow(2,no_of_bits)-1))
 	{
-		Analog_value = convertDecimaltoAnalogue(Decimal_value,maximum_limit,12);
+		Analog_value = funp_convertDecimaltoAnalogue(Decimal_value,maximum_limit,no_of_bits);
 		roundoffAnalogValue(Analog_value,&roundedoff_value);
 	}
 	else
@@ -59,6 +60,7 @@ int convertDigitalToAnalog(const int* binaryValue,int sizeofArray, int maximum_l
 	return roundedoff_value;
 }
 
+/*
 int convertDigitalToAnalog_chargingAnddischarging(const int* binaryValue,int sizeofArray, int maximum_limit,
 						   void (*funp_printonConsole)(),int (*funp_convertBinarytoDecimal)(const int*,int))
 {
@@ -75,7 +77,7 @@ int convertDigitalToAnalog_chargingAnddischarging(const int* binaryValue,int siz
 		funp_printonConsole;
 	}
 	return roundedoff_value;
-}
+}*/
 bool isChargingSessionWithintherange(int index,const int* chargingSession, const int* range)
 {
 	return (chargingSession[index]>=range[0]) && (chargingSession[index]<=range[1]);
@@ -165,4 +167,14 @@ string getRangeandReadingsinChargingSession(int* chargingSession,int no_of_Charg
 	}
 
 	return RANGES_READINGS;
+}
+
+int main()
+{
+  int Digital_value1[10] = {1,1,1,1,1,0,0,0,0,1} ;
+  int size_of_Array = sizeof(Digital_value1)/sizeof(Digital_value1[0]);
+  void (*funp_printOnConsole)() = printonConsole;
+  int (*funp_convertBinarytoDecimal)(const int*,int) = convertBinarytoDecimal;
+  float (*funp_convertDecimaltoAnalogue)(int,int,int) = convertDecimaltoAnalogue_chargingDischarding;
+  cout<<convertDigitalToAnalog(Digital_value1, size_of_Array, 15,10,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalogue)<<endl;
 }
