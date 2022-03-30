@@ -24,8 +24,8 @@ TEST_CASE("Check conversion digital to Analog"){
   int size_of_Array = sizeof(Digital_value1)/sizeof(Digital_value1[0]);
   void (*funp_printOnConsole)() = printonConsole;
   int (*funp_convertBinarytoDecimal)(const int*,int) = convertBinarytoDecimal;
-  float (*funp_convertDecimaltoAnalogue)(int,int,int) = convertDecimaltoAnalogue;
-  REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 10,12,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalogue) == 4);
+  float (*funp_convertDecimaltoAnalog)(int,int,int) = convertDecimaltoAnalog;
+  REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 10,12,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalog) == 4);
 }
 
 
@@ -34,6 +34,6 @@ TEST_CASE("Check conversion Analog to digital for sensor that calculates chargin
   int size_of_Array = sizeof(Digital_value1)/sizeof(Digital_value1[0]);
   void (*funp_printOnConsole)() = printonConsole;
   int (*funp_convertBinarytoDecimal)(const int*,int) = convertBinarytoDecimal;
-  float (*funp_convertDecimaltoAnalogue)(int,int,int) = convertDecimaltoAnalogue_chargingDischarging;
-  REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 15,10,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalogue) ==14);
+  float (*funp_convertDecimaltoAnalog)(int,int,int) = convertDecimaltoAnalog_chargingDischarging;
+  REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 15,10,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalog) ==14);
 }
