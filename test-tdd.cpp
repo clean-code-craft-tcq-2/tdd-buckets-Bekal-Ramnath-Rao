@@ -24,14 +24,16 @@ TEST_CASE("Check conversion digital to Analog"){
   int size_of_Array = sizeof(Digital_value1)/sizeof(Digital_value1[0]);
   void (*funp_printOnConsole)() = printonConsole;
   int (*funp_convertBinarytoDecimal)(const int*,int) = convertBinarytoDecimal;
-  REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 10,funp_printOnConsole,funp_convertBinarytoDecimal) == 4);
+  float (*funp_convertDecimaltoAnalogue)(int,int,int) = convertDecimaltoAnalogue;
+  REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 10,12,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalogue) == 4);
 }
 
 
 TEST_CASE("Check conversion Analog to digital for sensor that calculates charging and discharging current"){
-  int Digital_value1[10] = {0,1,1,0,1,1,0,0,0,1} ;
+  int Digital_value1[10] = {1,1,1,1,1,0,0,0,0,1} ;
   int size_of_Array = sizeof(Digital_value1)/sizeof(Digital_value1[0]);
   void (*funp_printOnConsole)() = printonConsole;
   int (*funp_convertBinarytoDecimal)(const int*,int) = convertBinarytoDecimal;
-  REQUIRE(convertDigitalToAnalog_chargingAnddischarging(Digital_value1, size_of_Array, 10,funp_printOnConsole,funp_convertBinarytoDecimal) == 4);
+  float (*funp_convertDecimaltoAnalogue)(int,int,int) = convertDecimaltoAnalogue_chargingDischarding;
+  REQUIRE(convertDigitalToAnalog(Digital_value1, size_of_Array, 15,10,funp_printOnConsole,funp_convertBinarytoDecimal,funp_convertDecimaltoAnalogue) == 14);
 }
