@@ -60,24 +60,6 @@ int convertDigitalToAnalog(const int* binaryValue,int sizeofArray, int maximum_l
 	return roundedoff_value;
 }
 
-/*
-int convertDigitalToAnalog_chargingAnddischarging(const int* binaryValue,int sizeofArray, int maximum_limit,
-						   void (*funp_printonConsole)(),int (*funp_convertBinarytoDecimal)(const int*,int))
-{
-	float Analog_value = 0;
-	int roundedoff_value;
-	int Decimal_value = funp_convertBinarytoDecimal(binaryValue,sizeofArray);
-	if(Decimal_value < 1023)
-	{
-		Analog_value = convertDecimaltoAnalogue_chargingDischarding(Decimal_value,maximum_limit,10);
-		roundoffAnalogValue(Analog_value,&roundedoff_value);
-	}
-	else
-	{
-		funp_printonConsole;
-	}
-	return roundedoff_value;
-}*/
 bool isChargingSessionWithintherange(int index,const int* chargingSession, const int* range)
 {
 	return (chargingSession[index]>=range[0]) && (chargingSession[index]<=range[1]);
