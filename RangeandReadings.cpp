@@ -55,6 +55,7 @@ int convertDigitalToAnalog(const int* binaryValue,int sizeofArray, int maximum_l
 	else
 	{
 		funp_printonConsole;
+		return -1;
 	}
 	return roundedoff_value;
 }
